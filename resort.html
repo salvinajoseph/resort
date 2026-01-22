@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stanley's Resort | Coorg</title>
+    
+    <!-- Google Fonts: Playfair Display for headings, Lato for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS Variables: The Coorg Palette --- */
+        :root {
+            --primary-green: #2c3e28; /* Deep Forest */
+            --secondary-green: #5d7a52; /* Sage/Fern */
+            --coffee-brown: #5d4037; /* Earthy/Bean */
+            --cream: #f4f1ea; /* Off-white background */
+            --gold: #d4af37; /* Sunlight accent */
+            --text-dark: #2c2c2c;
+            --text-light: #f4f4f4;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--primary-green);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--coffee-brown);
+        }
+
+        .sub-text {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            font-style: italic;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(244, 241, 234, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: var(--primary-green);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--coffee-brown);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-book {
+            background-color: var(--coffee-brown);
+            color: var(--cream);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn-book:hover {
+            background-color: var(--primary-green);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        /* --- Hero Section (Parallax) --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(44, 62, 40, 0.4), rgba(44, 62, 40, 0.4)), url('https://picsum.photos/seed/coorgmist/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            padding-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        /* --- About Section --- */
+        #about {
+            padding: 6rem 10%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        .about-img {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 10px 100px 10px 10px; /* Organic shape */
+            box-shadow: 20px 20px 0px var(--secondary-green);
+        }
+
+        /* --- Rooms/Accommodation --- */
+        #rooms {
+            padding: 6rem 5%;
+            background-color: #fff;
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .room-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        .room-img {
+            height: 400px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .room-card:hover .room-img {
+            transform: scale(1.1);
+        }
+
+        .room-details {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: #fff;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(10px);
+            transition: transform 0.3s;
+        }
+
+        .room-card:hover .room-details {
+            transform: translateY(0);
+        }
+
+        .room-details h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        /* --- Nature Activities --- */
+        #activities {
+            padding: 6rem 10%;
+            background-color: var(--primary-green);
+            color: #fff;
+        }
+
+        #activities .section-title { color: #fff; }
+        #activities .sub-text { color: #ccc; }
+
+        .activity-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .activity-item {
+            background: rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            flex: 1 1 250px;
+            transition: background 0.3s;
+        }
+
+        .activity-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .activity-item i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-item h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-family: var(--font-body);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Gallery Grid --- */
+        #gallery {
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+            filter: brightness(0.8);
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        /* Span adjustments */
+        .gallery-item:nth-child(1) { grid-column: span 2; height: 400px; }
+        .gallery-item:nth-child(4) { grid-column: span 2; }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #1a2a18;
+            color: #aaa;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .social-icons {
+            margin: 1.5rem 0;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover { color: var(--gold); }
+
+        /* --- Animations --- */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 3rem; }
+            #about { flex-direction: column-reverse; }
+            .nav-links { display: none; } /* Simplified for demo */
+            .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 4; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-leaf"></i> STANLEY'S RESORT
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#rooms">Cottages</a>
+            <a href="#activities">Experience</a>
+        </div>
+        <a href="#contact" class="btn-book">Book Stay</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home">
+        <div class="hero-content">
+            <h1>Sanctuary in the Mist</h1>
+            <p>Escape to the heart of Coorg</p>
+            <a href="#rooms" class="btn-book" style="background: #fff; color: var(--primary-green);">Discover Your Stay</a>
+        </div>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-text">
+            <span style="color: var(--coffee-brown); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Welcome to Nature</span>
+            <h2>Where the Forest Breathes</h2>
+            <p>Nestled amidst the lush coffee plantations and dense rainforests of Coorg, Stanley's Resort is a haven for those seeking solitude and serenity. We offer an immersive experience where the only sounds you hear are the chirping of exotic birds and the rustle of leaves.</p>
+            <p>Our resort is designed to blend seamlessly with the environment, offering luxury that doesn't compromise the beauty of nature. Wake up to the aroma of fresh coffee and misty mountains right outside your window.</p>
+            <div style="margin-top: 2rem; display: flex; gap: 2rem;">
+                <div>
+                    <h3 style="font-size: 2rem; color: var(--gold);">15+</h3>
+                    <p>Acres of Forest</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 2rem; color: var(--gold);">50+</h3>
+                    <p>Exotic Birds</p>
+                </div>
+            </div>
+        </div>
+        <div class="about-img">
+            <!-- Placeholder image of nature/coffee plantation -->
+            <img src="https://picsum.photos/seed/coorgcoffee/600/700" alt="Coffee Plantation View">
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms">
+        <h2 class="section-title">Stay in the Wild</h2>
+        <p class="sub-text">Comfortable cottages designed to bring the outdoors in.</p>
+        
+        <div class="room-grid">
+            <div class="room-card">
+                <img src="https://picsum.photos/seed/cottage1/400/500" class="room-img" alt="Forest Villa">
+                <div class="room-details">
+                    <h3>The Forest Villa</h3>
+                    <p>Surrounded by ancient trees, featuring a private balcony and outdoor shower.</p>
+                </div>
+            </div>
+            <div class="room-card">
+                <img src="https://picsum.photos/seed/cottage2/400/500" class="room-img" alt="Coffee Estate Suite">
+                <div class="room-details">
+                    <h3>Estate Suite</h3>
+                    <p>Overlooks our private coffee plantation with a cozy fireplace for chilly Coorg nights.</p>
+                </div>
+            </div>
+            <div class="room-card">
+                <img src="https://picsum.photos/seed/cottage3/400/500" class="room-img" alt="Treehouse">
+                <div class="room-details">
+                    <h3>The Canopy Treehouse</h3>
+                    <p>Elevated amongst the branches, offering a 360-degree view of the Western Ghats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities / Nature Experience -->
+    <section id="activities">
+        <h2 class="section-title">Nature & You</h2>
+        <p class="sub-text">Curated experiences to reconnect with the earth.</p>
+
+        <div class="activity-container">
+            <div class="activity-item">
+                <i class="fas fa-hiking"></i>
+                <h3>Trekking</h3>
+                <p>Guided treks through the lush green hills and hidden waterfalls of Coorg.</p>
+            </div>
+            <div class="activity-item">
+                <i class="fas fa-mug-hot"></i>
+                <h3>Coffee Tour</h3>
+                <p>Walk through our spice and coffee gardens, learning the art of brewing.</p>
+            </div>
+            <div class="activity-item">
+                <i class="fas fa-campground"></i>
+                <h3>Bonfire Night</h3>
+                <p>Stargazing and storytelling around a warm bonfire under the clear sky.</p>
+            </div>
+            <div class="activity-item">
+                <i class="fas fa-spa"></i>
+                <h3>Forest Spa</h3>
+                <p>Organic massages using natural oils and herbs sourced locally.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <div class="gallery-item">
+            <img src="https://picsum.photos/seed/rainforest/800/800" alt="Rainforest">
+        </div>
+        <div class="gallery-item">
+            <img src="https://picsum.photos/seed/birds/400/400" alt="Birds">
+        </div>
+        <div class="gallery-item">
+            <img src="https://picsum.photos/seed/leaves/400/400" alt="Leaves">
+        </div>
+        <div class="gallery-item">
+            <img src="https://picsum.photos/seed/river/800/400" alt="River">
+        </div>
+        <div class="gallery-item">
+            <img src="https://picsum.photos/seed/sunset/400/400" alt="Sunset">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-logo">STANLEY'S RESORT</div>
+        <p>Madikeri, Coorg, Karnataka - 571201</p>
+        <p>+91 98765 43210 | stay@stanleysresort.com</p>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.7;">
+            &copy; 2023 Stanley's Resort Coorg. Designed for nature lovers.
+        </p>
+    </footer>
+
+</body>
+</html>
